@@ -1,0 +1,8 @@
+@import './login';
+@import './register';
+@import './profile';
+
+body {
+    background: $bg-color;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

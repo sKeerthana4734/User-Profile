@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login Page</title>
+        <link rel="stylesheet" href="./scss/styles.css" />
+        <script>
+            if (sessionStorage.getItem('id') != null) {
+                window.location.href = 'profile.html';
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>SIGN IN</h1>
+            <div id="message"></div>
+            <div id="error"></div>
+            <br />
+            <form autocomplete="off" action="" method="post">
+                <input type="hidden" id="action" value="login" />
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" value="" />
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" value="" />
+                <div class="button-container">
+                    <button type="button" onclick="submitData();">
+                        Sign In
+                    </button>
+                </div>
+            </form>
+            <br />
+            <p>
+                Don't have an account?
+                <span><a href="register.html">Sign up</a></span>
+            </p>
+        </div>
+
+        <script type="text/javascript" src="./js/login.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            if (sessionStorage.getItem('register-message') !== null) {
+                document.getElementById('message').innerHTML =
+                    sessionStorage.getItem('register-message');
+                sessionStorage.clear();
+            }
+        </script>
+    </body>
+</html>

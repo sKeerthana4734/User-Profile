@@ -1,0 +1,99 @@
+@import './variables';
+
+@mixin flex-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+@mixin button-style {
+    width: 50%;
+    margin: 10%;
+    padding: 10px;
+    font-size: 1.2rem;
+    background: $button-color;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.container {
+    @include flex-center;
+    height: 100vh;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.3),
+            rgba(255, 255, 255, 0.6)
+        );
+        z-index: -1;
+    }
+
+    h1 {
+        font-size: 3rem;
+        font-weight: 400;
+        margin: 0%;
+    }
+
+    form {
+        width: 100%;
+        max-width: $container-max-width;
+        padding: 30px;
+        background: rgba(129, 197, 236, 0.2);
+        border-radius: 10px;
+
+        label {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            margin-right: 35px;
+            border-bottom: 1px solid black;
+            text-align: left;
+            background: none;
+            font-size: 1.3rem;
+        }
+
+        button {
+            @include button-style;
+        }
+
+        a {
+            margin-top: 10px;
+            display: inline-block;
+            text-decoration: none;
+        }
+    }
+
+    #error {
+        color: red;
+        margin-top: 10px;
+    }
+
+    #message {
+        color: blue;
+        margin-top: 10px;
+    }
+}

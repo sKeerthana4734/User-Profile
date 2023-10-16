@@ -1,0 +1,31 @@
+@import './login';
+
+.profile-container {
+    @extend .container;
+    form {
+        width: 100%;
+        max-width: 800px;
+        padding: 15px;
+    }
+
+    button {
+        @include button-style;
+    }
+    .disable {
+        cursor: not-allowed;
+    }
+}
+
+.form-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.left-column,
+.right-column {
+    padding: 5px;
+    margin: 0;
+    border-radius: 5px;
+    outline: none;
+}
