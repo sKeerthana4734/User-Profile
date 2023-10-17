@@ -6,7 +6,7 @@
         <title>Login Page</title>
         <link rel="stylesheet" href="./scss/styles.css" />
         <script>
-            if (sessionStorage.getItem('id') != null) {
+            if (localStorage.getItem('id') != null) {
                 window.location.href = 'profile.html';
             }
         </script>
@@ -39,10 +39,10 @@
         <script type="text/javascript" src="./js/login.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script>
-            if (sessionStorage.getItem('register-message') !== null) {
+            if (localStorage.getItem('register-message') !== null) {
                 document.getElementById('message').innerHTML =
-                    sessionStorage.getItem('register-message');
-                sessionStorage.clear();
+                    localStorage.getItem('register-message');
+                localStorage.clear();
             }
         </script>
     </body>

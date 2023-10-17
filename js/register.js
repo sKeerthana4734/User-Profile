@@ -14,7 +14,7 @@ function registerData() {
             success: function (response) {
                 if (response.register == true) {
                     $("#error").html("");
-                    sessionStorage.setItem("register-message", response.message);
+                    localStorage.setItem("register-message", response.message);
                     console.log(response.message);
                     window.location.href = 'index.html';
                 }

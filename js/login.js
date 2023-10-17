@@ -15,7 +15,9 @@ function submitData() {
                 if (response.login == true) {
                     $("#message").html(response.message);
                     $("#error").html("");
-                    sessionStorage.setItem('id', response.id);
+                    localStorage.setItem('id', response.id);
+                    // alert(localStorage.getItem('id'));
+                    // console.log(localStorage.getItem('id'));
                     window.location.reload();
                 }
                 else {

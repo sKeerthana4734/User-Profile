@@ -10,7 +10,7 @@ function displayUserDetails() {
         country: 'Country',
     };
 
-    let userData = sessionStorage.getItem('user-data');
+    let userData = localStorage.getItem('user-data');
     let sessionData = JSON.parse(userData);
     let stored = 0;
     let count = 0;
@@ -96,10 +96,10 @@ function displayUserDetails() {
     let brk = document.createElement('br');
     rightColumn.appendChild(brk);
 
-    if (sessionStorage.getItem('save-message') !== null) {
-        console.log(sessionStorage.getItem('save-message'));
+    if (localStorage.getItem('save-message') !== null) {
+        console.log(localStorage.getItem('save-message'));
         document.getElementById('message').innerHTML =
-            sessionStorage.getItem('save-message');
+            localStorage.getItem('save-message');
     }
 }
 
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
         success: function (response) {
             if (response) {
                 const userData = JSON.stringify(response);
-                sessionStorage.setItem("user-data", userData);
+                localStorage.setItem("user-data", userData);
                 displayUserDetails();
             }
 
@@ -143,7 +143,7 @@ function saveData() {
         data: data,
         success: function (response) {
             if (response.save == true) {
-                sessionStorage.setItem("save-message", response.message);
+                localStorage.setItem("save-message", response.message);
             }
             else {
                 $("#error").html(response.message);
@@ -153,6 +153,6 @@ function saveData() {
 }
 
 document.getElementById("logout").addEventListener("click", function () {
-    sessionStorage.clear();
+    localStorage.clear();
     window.location.href = "index.html";
 });
