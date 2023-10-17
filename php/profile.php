@@ -1,11 +1,13 @@
 <?php
 
-require 'db.php';
+require 'connection.php';
+global $redis;
+
 header('Content-Type: application/json');
 if(isset($_POST["action"]) && $_POST["action"]=="save"){
     save();
 }
-if(isset($_SESSION["id"]) && isset($_POST["action"])){
+if(isset($_POST["action"]) && $redis->get('userID')!=null){
     if ($_POST["action"]==="load_profile"){
     getUserdata();
     }
@@ -13,7 +15,8 @@ if(isset($_SESSION["id"]) && isset($_POST["action"])){
 // retreive user data from db
 function getUserdata(){
     global $conn;
-    $id = intval($_SESSION["id"]);
+    global $redis;
+    $id = intval($redis->get('userID'));
     $query = "SELECT * FROM users WHERE `index` = ?";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "i", $id);
@@ -44,7 +47,7 @@ function getUserdata(){
 
 function save(){
   global $conn;
-
+  global $redis;
   function isPostDataEmptyOrNull($postArray) {
     foreach ($postArray as $value) {
         if (empty($value) && !is_numeric($value)) {
@@ -66,7 +69,7 @@ if (isPostDataEmptyOrNull($_POST)) {
   $email = $_POST["email"];
   $phone = $_POST["phone"];
   $country = $_POST["country"]; 
-  $id = intval($_SESSION['id']);
+  $id = intval($redis->get('userID'));
 
 
   $query = "UPDATE users SET firstname = ?, lastname = ?, email = ?, age = ?, gender = ?, phone = ?, country = ? WHERE `index` = ?";

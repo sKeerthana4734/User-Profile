@@ -1,5 +1,5 @@
 <?php
-require 'db.php';
+require 'connection.php';
 
 if(isset($_POST["action"]) && $_POST["action"]=="login"){
     login();
@@ -8,6 +8,7 @@ if(isset($_POST["action"]) && $_POST["action"]=="login"){
 
 function login(){
   global $conn;
+  global $redis;
   header('Content-Type: application/json');
   if(isset($_POST['username']) && isset($_POST['password']))
   {
@@ -31,7 +32,7 @@ function login(){
             if($password == $row['password']){
                 $response["login"] = true;
                 $response["id"] = $row["index"];
-                $_SESSION["id"] = $row["index"];
+                $redis->set('userID', $row["index"]);
                 $response["message"]="Login Successful";
                 echo json_encode($response);
             }
