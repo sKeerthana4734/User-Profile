@@ -19,12 +19,16 @@ function register(){
     exit;
   }
 
-  $user = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
-  if(mysqli_num_rows($user) > 0){
-    $response["message"]="Username Has Already Taken";
-    echo json_encode($response);
-    exit;
+  $usr_query = $conn->prepare("SELECT * FROM users WHERE username = ?");
+  $usr_query->bind_param("s", $username);
+  $usr_query->execute();
+  $usr_query->store_result();
+  if ($usr_query->num_rows > 0) {
+      $response["message"] = "Username Has Already Taken";
+      echo json_encode($response);
+      exit;
   }
+  $usr_query->close();
 
   $query = "INSERT INTO users (name, username, password) VALUES (?, ?, ?)";
   $stmt = mysqli_prepare($conn, $query);

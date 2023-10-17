@@ -23,12 +23,13 @@ function login(){
         echo json_encode($response);
         exit;
     }else{
-        $user = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if(mysqli_num_rows($user) > 0){
-
-            $row = mysqli_fetch_assoc($user);
-
+        if($result->num_rows > 0){
+            $row = $result->fetch_assoc();
             if($password == $row['password']){
                 $response["login"] = true;
                 $response["id"] = $row["index"];
